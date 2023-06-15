@@ -1,0 +1,64 @@
+body {
+  font-family: "Open Sans", sans-serif;
+}
+
+.weather-app {
+  border: 1px solid #dadde1;
+  padding: 25px;
+  margin: 20px;
+  border-radius: 6px;
+  max-width: 700px;
+}
+.current {
+  line-height: 15px;
+  font-size: 17px;
+  font-weight: 18px;
+}
+.time {
+  font-size: 15px;
+  line-height: 15px;
+}
+.city-name {
+  font-weight: 38px;
+  font-size: 27px;
+  margin-bottom: 6px;
+  margin-right: 25px;
+  text-align: right;
+}
+li {
+  color: #6a6b6c;
+  font-size: 15px;
+  list-style: none;
+  text-align: right;
+  line-height: 18px;
+  margin-right: 25px;
+}
+
+.nextFiveDays {
+  border: 1px solid #f8f9fa;
+  padding: 10px;
+  margin: 0 6px 0 6px;
+  border-radius: 5px;
+  transition: all 2ms ease-in-out;
+}
+.nextFiveDays:hover {
+  background-color: #f8f9fa;
+}
+.weather-icon-on-display {
+  position: relative;
+  top: -15px;
+}
+.main-degree-no {
+  font-size: 54px;
+}
+.units {
+  position: relative;
+  top: -31px;
+}
+.fahrenheit,
+.celcius {
+  color: #6a6b6c;
+}
+.clicked-degrees {
+  color: blue;
+}
