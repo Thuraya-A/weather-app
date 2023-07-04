@@ -43,14 +43,13 @@ function displayTemperature(response) {
   let temperature = Math.round(response.data.main.temp);
   let degreeNo = document.querySelector(".main-degree-no");
   degreeNo.innerHTML = `${temperature}`;
+  let cityName = document.querySelector(".city-name");
+  cityName.innerHTML = response.data.name;
 }
-
 function getCity(event) {
   event.preventDefault();
   let searchInput = document.querySelector("#search-input");
   let citySearched = searchInput.value;
-  let cityName = document.querySelector(".city-name");
-  cityName.innerHTML = `${citySearched}`;
   let apiKey = "c119ffef35b7245a5e03b6e5724ae961";
   let weatherApiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${citySearched}&units=metric&appid=${apiKey}`;
   axios.get(weatherApiUrl).then(displayTemperature);
