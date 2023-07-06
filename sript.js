@@ -40,11 +40,16 @@ let now = new Date();
 currentTime.innerHTML = displayCurrentTime(now);
 
 function displayTemperature(response) {
+  console.log(response.data);
   let temperature = Math.round(response.data.main.temp);
   let degreeNo = document.querySelector(".main-degree-no");
   degreeNo.innerHTML = `${temperature}`;
   let cityName = document.querySelector(".city-name");
   cityName.innerHTML = response.data.name;
+  let Humidity = document.querySelector("#humidity-percentage");
+  Humidity.innerHTML = Math.round(response.data.main.humidity);
+  let Wind = document.querySelector("#wind-speed");
+  Wind.innerHTML = Math.round(response.data.wind.speed);
 }
 function getCity(event) {
   event.preventDefault();
