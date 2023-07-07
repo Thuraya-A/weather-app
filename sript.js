@@ -18,9 +18,16 @@ function toCelcius(event) {
 let celcius = document.querySelector("#celcius-link");
 celcius.addEventListener("click", toCelcius);
 
-function displayCurrentTime(date) {
-  let currentHour = date.getHours();
-  let currentMinitue = date.getMinutes();
+function displayTime(timestamp) {
+  let date = new Date(timestamp);
+  let hour = date.getHours();
+  if (hour < 10) {
+    hour = `0${hour}`;
+  }
+  let minute = date.getMinutes();
+  if (minute < 10) {
+    minute = `0${minute}`;
+  }
   let days = [
     "sunday",
     "Monday",
@@ -31,13 +38,10 @@ function displayCurrentTime(date) {
     "Saturday",
   ];
 
-  let currentDay = days[date.getDay()];
+  let day = days[date.getDay()];
 
-  return `${currentDay} ${currentHour}:${currentMinitue}`;
+  return `${day} ${hour}:${minute}`;
 }
-let currentTime = document.querySelector(".time");
-let now = new Date();
-currentTime.innerHTML = displayCurrentTime(now);
 
 function displayTemperature(response) {
   console.log(response.data);
@@ -50,6 +54,8 @@ function displayTemperature(response) {
   Humidity.innerHTML = Math.round(response.data.main.humidity);
   let Wind = document.querySelector("#wind-speed");
   Wind.innerHTML = Math.round(response.data.wind.speed);
+  let date = document.querySelector("#weatherUpdateDate");
+  date.innerHTML = displayTime(response.data.dt * 1000);
 }
 function getCity(event) {
   event.preventDefault();
