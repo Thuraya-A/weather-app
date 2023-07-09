@@ -45,6 +45,7 @@ function displayTime(timestamp) {
 }
 
 function displayTemperature(response) {
+  console.log(response.data);
   let temperature = Math.round(response.data.main.temp);
   celciusTemperature = temperature;
   let degreeNo = document.querySelector(".main-degree-no");
@@ -57,6 +58,8 @@ function displayTemperature(response) {
   Wind.innerHTML = Math.round(response.data.wind.speed);
   let date = document.querySelector("#weatherUpdateDate");
   date.innerHTML = displayTime(response.data.dt * 1000);
+  let weatherDescription = document.querySelector("#weather-description");
+  weatherDescription.innerHTML = response.data.weather[0].description;
   let mainIconElement = document.querySelector(`#mainWeatherIcon`);
   let iconCode = response.data.weather[0].icon;
   mainIconElement.setAttribute(
