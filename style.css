@@ -58,9 +58,12 @@ li {
 .fahrenheit,
 .celcius {
   color: #6a6b6c;
+  text-decoration: none;
+  cursor: default;
 }
-.clicked-degrees {
-  color: blue;
+
+.clicked {
+  color: black;
 }
 footer {
   margin-left: 25px;

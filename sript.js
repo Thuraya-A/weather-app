@@ -3,8 +3,8 @@ function toFahrenheit(event) {
   let degrees = document.querySelector("#degree-change");
   let degreesInFahrenheit = Math.round((celciusTemperature * 9) / 5 + 32);
   degrees.innerHTML = degreesInFahrenheit;
-  let fahrenheitUnit = document.querySelector("#fahrenheit-link");
-  fahrenheitUnit.classList.add("clicked-degrees");
+  celcius.classList.remove("clicked");
+  fahrenheit.classList.add("clicked");
 }
 let fahrenheit = document.querySelector("#fahrenheit-link");
 fahrenheit.addEventListener("click", toFahrenheit);
@@ -13,8 +13,8 @@ function toCelcius(event) {
   event.preventDefault();
   let degrees = document.querySelector("#degree-change");
   degrees.innerHTML = celciusTemperature;
-  let celciusUnit = document.querySelector("#celcius-link");
-  celciusUnit.classList.add("clicked-degrees");
+  celcius.classList.add("clicked");
+  fahrenheit.classList.remove("clicked");
 }
 let celcius = document.querySelector("#celcius-link");
 celcius.addEventListener("click", toCelcius);
