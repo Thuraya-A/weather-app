@@ -1,7 +1,8 @@
 function toFahrenheit(event) {
   event.preventDefault();
   let degrees = document.querySelector("#degree-change");
-  degrees.innerHTML = "66";
+  let degreesInFahrenheit = Math.round((celciusTemperature * 9) / 5 + 32);
+  degrees.innerHTML = degreesInFahrenheit;
   let fahrenheitUnit = document.querySelector("#fahrenheit-link");
   fahrenheitUnit.classList.add("clicked-degrees");
 }
@@ -11,7 +12,7 @@ fahrenheit.addEventListener("click", toFahrenheit);
 function toCelcius(event) {
   event.preventDefault();
   let degrees = document.querySelector("#degree-change");
-  degrees.innerHTML = "72";
+  degrees.innerHTML = celciusTemperature;
   let celciusUnit = document.querySelector("#celcius-link");
   celciusUnit.classList.add("clicked-degrees");
 }
@@ -29,7 +30,7 @@ function displayTime(timestamp) {
     minute = `0${minute}`;
   }
   let days = [
-    "sunday",
+    "Sunday",
     "Monday",
     "Tuesday",
     "Wednesday",
@@ -45,6 +46,7 @@ function displayTime(timestamp) {
 
 function displayTemperature(response) {
   let temperature = Math.round(response.data.main.temp);
+  celciusTemperature = temperature;
   let degreeNo = document.querySelector(".main-degree-no");
   degreeNo.innerHTML = `${temperature}`;
   let cityName = document.querySelector(".city-name");
@@ -90,3 +92,5 @@ function getCurrentPosition(event) {
 }
 let CurrentButton = document.querySelector("#current-button");
 CurrentButton.addEventListener("click", getCurrentPosition);
+
+let celciusTemperature = null;
