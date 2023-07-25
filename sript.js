@@ -102,7 +102,7 @@ celcius.addEventListener("click", toCelcius);
 
 function getForcast(coordinates) {
   let apiKey = "c119ffef35b7245a5e03b6e5724ae961";
-  let apiURL = `https://api.openweathermap.org/data/3.0/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}}&appid=${apiKey}`;
+  let apiURL = `https://api.openweathermap.org/data/3.0/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&units=metric&appid=${apiKey}`;
   axios.get(apiURL).then(displayForcast);
 }
 function displayForcast() {
