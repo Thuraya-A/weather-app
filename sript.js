@@ -1,24 +1,3 @@
-function toFahrenheit(event) {
-  event.preventDefault();
-  let degrees = document.querySelector("#degree-change");
-  let degreesInFahrenheit = Math.round((celciusTemperature * 9) / 5 + 32);
-  degrees.innerHTML = degreesInFahrenheit;
-  celcius.classList.remove("clicked");
-  fahrenheit.classList.add("clicked");
-}
-let fahrenheit = document.querySelector("#fahrenheit-link");
-fahrenheit.addEventListener("click", toFahrenheit);
-
-function toCelcius(event) {
-  event.preventDefault();
-  let degrees = document.querySelector("#degree-change");
-  degrees.innerHTML = celciusTemperature;
-  celcius.classList.add("clicked");
-  fahrenheit.classList.remove("clicked");
-}
-let celcius = document.querySelector("#celcius-link");
-celcius.addEventListener("click", toCelcius);
-
 function displayTime(timestamp) {
   let date = new Date(timestamp);
   let hour = date.getHours();
@@ -43,6 +22,20 @@ function displayTime(timestamp) {
 
   return `${day} ${hour}:${minute}`;
 }
+
+function getUsersGeolocation(position) {
+  let latitude = position.coords.latitude;
+  let longitude = position.coords.longitude;
+  let apiKey = "c119ffef35b7245a5e03b6e5724ae961";
+  let weatherApiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
+  axios.get(weatherApiUrl).then(displayTemperature);
+}
+function getCurrentPosition(event) {
+  event.preventDefault();
+  navigator.geolocation.getCurrentPosition(getUsersGeolocation);
+}
+let CurrentButton = document.querySelector("#current-button");
+CurrentButton.addEventListener("click", getCurrentPosition);
 
 function displayTemperature(response) {
   console.log(response.data);
@@ -70,7 +63,11 @@ function displayTemperature(response) {
     "alt",
     `${response.data.weather[0].description}`
   );
+  getForcast(response.data.coords);
 }
+
+let celciusTemperature = null;
+
 function getCity(event) {
   event.preventDefault();
   let searchInput = document.querySelector("#search-input");
@@ -82,18 +79,54 @@ function getCity(event) {
 let searchForCityForm = document.querySelector("#search-form");
 searchForCityForm.addEventListener("submit", getCity);
 
-function getUsersGeolocation(position) {
-  let latitude = position.coords.latitude;
-  let longitude = position.coords.longitude;
-  let apiKey = "c119ffef35b7245a5e03b6e5724ae961";
-  let weatherApiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
-  axios.get(weatherApiUrl).then(displayTemperature);
-}
-function getCurrentPosition(event) {
+function toFahrenheit(event) {
   event.preventDefault();
-  navigator.geolocation.getCurrentPosition(getUsersGeolocation);
+  let degrees = document.querySelector("#degree-change");
+  let degreesInFahrenheit = Math.round((celciusTemperature * 9) / 5 + 32);
+  degrees.innerHTML = degreesInFahrenheit;
+  celcius.classList.remove("clicked");
+  fahrenheit.classList.add("clicked");
 }
-let CurrentButton = document.querySelector("#current-button");
-CurrentButton.addEventListener("click", getCurrentPosition);
+let fahrenheit = document.querySelector("#fahrenheit-link");
+fahrenheit.addEventListener("click", toFahrenheit);
 
-let celciusTemperature = null;
+function toCelcius(event) {
+  event.preventDefault();
+  let degrees = document.querySelector("#degree-change");
+  degrees.innerHTML = celciusTemperature;
+  celcius.classList.add("clicked");
+  fahrenheit.classList.remove("clicked");
+}
+let celcius = document.querySelector("#celcius-link");
+celcius.addEventListener("click", toCelcius);
+
+function getForcast(coordinates) {
+  let apiKey = "c119ffef35b7245a5e03b6e5724ae961";
+  let apiURL = `https://api.openweathermap.org/data/3.0/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}}&appid=${apiKey}`;
+  axios.get(apiURL).then(displayForcast);
+}
+function displayForcast() {
+  let forcastElement = document.querySelector(`#forcast`);
+  let forcastHTML = `<div class="row">`;
+
+  let days = ["Fri", "Sat", "Sun", "Mon", "Tues"];
+  days.forEach(function (day) {
+    forcastHTML =
+      forcastHTML +
+      `<div class="col nextFiveDays">
+                 <div class="row">
+                  <div class="col-8">
+                    <div>${day}</div>
+                    <img src="images/partly_cloudy.png" alt="" />
+                  </div>
+                  <div class="col-4">
+                    <div class="row mt-2 mb-4"><div class="col">19°</div></div>
+                    <div class="row"><div class="col fahrenheit">20°</div></div>
+                  </div>
+                </div>
+              </div>`;
+  });
+  forcastElement.innerHTML = forcastHTML + "</div>";
+}
+
+displayForcast();
