@@ -100,14 +100,6 @@ function toCelcius(event) {
 let celcius = document.querySelector("#celcius-link");
 celcius.addEventListener("click", toCelcius);
 
-function getForecast(coordinates) {
-  console.log(coordinates);
-  let apiKey = "c119ffef35b7245a5e03b6e5724ae961";
-  let apiURL = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&units=metric&appid=${apiKey}`;
-  axios.get(apiURL).then(displayForecast);
-  console.log(apiURL);
-}
-
 function displayForecast(response) {
   let forecastElement = document.querySelector(`#forecast`);
   let forecastHTML = `<div class="row">`;
@@ -131,3 +123,12 @@ function displayForecast(response) {
   });
   forecastElement.innerHTML = forecastHTML + "</div>";
 }
+
+function getForecast(coordinates) {
+  console.log(coordinates);
+  let apiKey = "c119ffef35b7245a5e03b6e5724ae961";
+  let apiURL = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+  axios.get(apiURL).then(displayForecast);
+}
+
+getForecast();
