@@ -68,22 +68,20 @@ function displayTemperature(response) {
 
 let celciusTemperature = null;
 
-function getCity(event) {
-  event.preventDefault();
-  let searchInput = document.querySelector("#search-input");
-  let citySearched = searchInput.value;
+function getCity(city) {
   let apiKey = "c119ffef35b7245a5e03b6e5724ae961";
-  let weatherApiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${citySearched}&units=metric&appid=${apiKey}`;
+  let weatherApiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
   axios.get(weatherApiUrl).then(displayTemperature);
 }
 
 function operateSubmit(event) {
   event.preventDefault();
   let searchInput = document.querySelector("#search-input");
-  getCity(searchInput.value);
+  let citySearched = searchInput.value;
+  getCity(citySearched);
 }
 let searchForCityForm = document.querySelector("#search-form");
-searchForCityForm.addEventListener("submit", getCity);
+searchForCityForm.addEventListener("submit", operateSubmit);
 
 function toFahrenheit(event) {
   event.preventDefault();
