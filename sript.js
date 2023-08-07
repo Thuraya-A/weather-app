@@ -76,6 +76,12 @@ function getCity(event) {
   let weatherApiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${citySearched}&units=metric&appid=${apiKey}`;
   axios.get(weatherApiUrl).then(displayTemperature);
 }
+
+function operateSubmit(event) {
+  event.preventDefault();
+  let searchInput = document.querySelector("#search-input");
+  getCity(searchInput.value);
+}
 let searchForCityForm = document.querySelector("#search-form");
 searchForCityForm.addEventListener("submit", getCity);
 
@@ -148,4 +154,4 @@ function getForecast(coordinates) {
   axios.get(apiURL).then(displayForecast);
 }
 
-getForecast();
+getCity("london");
