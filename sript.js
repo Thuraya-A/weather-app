@@ -83,8 +83,6 @@ function operateSubmit(event) {
 let searchForCityForm = document.querySelector("#search-form");
 searchForCityForm.addEventListener("submit", operateSubmit);
 
-f;
-
 function formatForecastDate(timestamp) {
   let date = new Date(timestamp * 1000);
   let day = date.getDay();
