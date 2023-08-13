@@ -83,26 +83,7 @@ function operateSubmit(event) {
 let searchForCityForm = document.querySelector("#search-form");
 searchForCityForm.addEventListener("submit", operateSubmit);
 
-function toFahrenheit(event) {
-  event.preventDefault();
-  let degrees = document.querySelector("#degree-change");
-  let degreesInFahrenheit = Math.round((celciusTemperature * 9) / 5 + 32);
-  degrees.innerHTML = degreesInFahrenheit;
-  celcius.classList.remove("clicked");
-  fahrenheit.classList.add("clicked");
-}
-let fahrenheit = document.querySelector("#fahrenheit-link");
-fahrenheit.addEventListener("click", toFahrenheit);
-
-function toCelcius(event) {
-  event.preventDefault();
-  let degrees = document.querySelector("#degree-change");
-  degrees.innerHTML = celciusTemperature;
-  celcius.classList.add("clicked");
-  fahrenheit.classList.remove("clicked");
-}
-let celcius = document.querySelector("#celcius-link");
-celcius.addEventListener("click", toCelcius);
+f;
 
 function formatForecastDate(timestamp) {
   let date = new Date(timestamp * 1000);
